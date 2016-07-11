@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">AviapoiskTask</string>
+    <string name="loading_error">Не удалось загрузить</string>
+</resources>
