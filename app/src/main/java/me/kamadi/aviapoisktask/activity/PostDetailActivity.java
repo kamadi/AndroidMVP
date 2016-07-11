@@ -9,6 +9,7 @@ import android.text.Html;
 import android.text.Spanned;
 import android.view.Display;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
@@ -69,6 +70,8 @@ public class PostDetailActivity extends AppCompatActivity implements PostDetailV
 
         if (getSupportActionBar() != null) {
             getSupportActionBar().setTitle(currentPost.getName());
+            getSupportActionBar().setDisplayShowHomeEnabled(true);
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         }
 
         Picasso.with(this)
@@ -92,6 +95,15 @@ public class PostDetailActivity extends AppCompatActivity implements PostDetailV
     protected void onDestroy() {
         super.onDestroy();
         presenter.onDestroy();
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == android.R.id.home) {
+            finish();
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 
 

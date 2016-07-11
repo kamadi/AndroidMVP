@@ -9,6 +9,7 @@ import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
 
@@ -46,8 +47,12 @@ public class PostActivity extends AppCompatActivity implements SwipeRefreshLayou
         ButterKnife.bind(this);
         currentMagazine = getIntent().getParcelableExtra(CURRENT_MAGAZINE);
         setTitle(currentMagazine.getName());
-        if (getSupportActionBar() != null)
+        if (getSupportActionBar() != null) {
             getSupportActionBar().setHomeButtonEnabled(true);
+            getSupportActionBar().setDisplayShowHomeEnabled(true);
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        }
+
         layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.addOnItemTouchListener(
@@ -75,6 +80,15 @@ public class PostActivity extends AppCompatActivity implements SwipeRefreshLayou
     @Override
     public void onRefresh() {
         presenter.getPosts();
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == android.R.id.home) {
+            finish();
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     @Override
